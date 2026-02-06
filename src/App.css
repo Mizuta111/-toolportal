@@ -1,0 +1,179 @@
+#root {
+  width: 100%;
+  height: 100%;
+}
+
+.logo {
+  height: 6em;
+  padding: 1.5em;
+  will-change: filter;
+  transition: filter 300ms;
+}
+.logo:hover {
+  filter: drop-shadow(0 0 2em #646cffaa);
+}
+.logo.react:hover {
+  filter: drop-shadow(0 0 2em #61dafbaa);
+}
+
+@keyframes logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  a:nth-of-type(2) .logo {
+    animation: logo-spin infinite 20s linear;
+  }
+}
+
+.card {
+  padding: 2em;
+}
+
+.read-the-docs {
+  color: #888;
+}
+
+/* === New Portal Styles === */
+
+/* App Layout */
+.app-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  width: 100%;
+  max-width: 1440px; /* Set a max width for the whole app */
+  margin: 0 auto; /* Center the app container */
+}
+
+.app-header {
+  background-color: #242424;
+  padding: 1rem 2rem;
+  border-bottom: 1px solid #3a3a3a;
+  width: 100%;
+  text-align: left;
+}
+
+.header-title-link {
+  color: #ffffff;
+  text-decoration: none;
+}
+
+.header-title-link h1 {
+  margin: 0;
+  font-size: 1.5rem;
+}
+
+.app-main {
+  flex-grow: 1;
+  width: 100%;
+  padding: 2rem;
+  text-align: left;
+}
+
+.app-footer {
+  background-color: #242424;
+  padding: 1rem 2rem;
+  border-top: 1px solid #3a3a3a;
+  width: 100%;
+  text-align: center;
+  color: #888;
+}
+
+.app-footer p {
+  margin: 0;
+  font-size: 0.9rem;
+}
+
+
+/* Portal Page */
+.portal-container {
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+.portal-container h2 {
+  border-bottom: 2px solid #646cff;
+  padding-bottom: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+/* Tool Card */
+.tool-card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+.tool-card {
+  background-color: #2a2a2a;
+  border: 1px solid #404040;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+.tool-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.tool-card-content {
+  padding: 1.5rem;
+}
+
+.tool-card h3 {
+  margin-top: 0;
+  color: #646cff;
+}
+
+.tool-card p {
+  color: #cccccc;
+  line-height: 1.6;
+}
+
+.tool-card-footer {
+  padding: 1rem 1.5rem;
+  border-top: 1px solid #404040;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.tool-link-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #ffffff;
+  background-color: #646cff;
+  border: none;
+  padding: 0.6rem 1.2rem;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: 500;
+  transition: background-color 0.2s ease;
+}
+
+.tool-link-button:hover {
+  background-color: #535bf2;
+}
+
+/* Back to portal link on tool pages */
+.back-to-portal-link {
+  display: inline-block;
+  margin-bottom: 2rem;
+  color: #c5c5c5;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.back-to-portal-link:hover {
+  color: #ffffff;
+}
