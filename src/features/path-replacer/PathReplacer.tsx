@@ -27,33 +27,20 @@ const PathReplacer: React.FC = () => {
     total: { found: 0, replaced: 0 },
   });
   const [highlightRanges, setHighlightRanges] = useState<{start: number, end: number}[]>([]);
-  const [inputHighlightRanges, setInputHighlightRanges] = useState<{start: number, end: number}[]>([]);
-
 
   // Define supported image extensions from regex
   const supportedImageExtensions = ['png', 'jpg', 'jpeg', 'gif', 'svg', 'webp', 'bmp', 'ico'];
-  const imageExtensionRegexPart = `(?:${supportedImageExtensions.join('|')})`;
 
   // Regex for HTML attributes (src, srcset, data-*, background, href)
   // Captures: 1: quote, 2: path before extension
-  // Using RegExp literal for simpler escaping
   const htmlImagePathRegex = /(?:src|srcset|data-[a-z-]+|background|href)\s*=\s*(['"]?)([^'")\s>]+\.(?:png|jpg|jpeg|gif|svg|webp|bmp|ico))\1/gi;
 
   // Regex for CSS url() function
   // Captures: 1: path before extension
-  // Using RegExp literal for simpler escaping
   const cssImagePathRegex = /url\(['"]?([^'")\s>]+\.(?:png|jpg|jpeg|gif|svg|webp|bmp|ico))['"]?\)/gi;
 
-  // Combined regex for highlighting paths in the input code (HTML and CSS only for now)
-  const combinedImagePathRegex = new RegExp(
-    `${htmlImagePathRegex.source}|${cssImagePathRegex.source}`,
-    'gi'
-  );
-
-
   // Regex for highlighting replaced paths in the output (now uses the same pattern as target replacement)
-  // Using RegExp literal for simpler escaping
-  const targetImagePathRegex = /(\{\+image_url\+\}imgs\/[^'")\s>]+\.(?:png|jpg|jpeg|gif|svg|webp|bmp|ico))/gi;
+
 
   // Helper function to highlight image paths correctly
   // This now takes explicit ranges to highlight
@@ -117,7 +104,7 @@ const PathReplacer: React.FC = () => {
 
     // Sort matches by index to process them in order
     allMatches.sort((a, b) => a.index - b.index);
-    setInputHighlightRanges(newlyFoundRanges);
+
 
     let htmlReplacedCount = 0;
     let cssReplacedCount = 0;
@@ -186,7 +173,7 @@ const PathReplacer: React.FC = () => {
 
   // Ensure textareas scroll together
   useEffect(() => {
-    const handleScroll = (sourceRef: React.RefObject<HTMLElement>, targetRef: React.RefObject<HTMLElement>) => {
+    const handleScroll = (sourceRef: React.RefObject<HTMLElement | null>, targetRef: React.RefObject<HTMLElement | null>) => {
       if (sourceRef.current && targetRef.current) {
         targetRef.current.scrollTop = sourceRef.current.scrollTop;
       }
