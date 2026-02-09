@@ -14,7 +14,7 @@ const MainLayout: React.FC = () => {
         <Outlet />
       </main>
       <footer className="app-footer">
-        <p>&copy; 2024 Tool Portal. All rights reserved.</p>
+        <p>&copy; 2026 Tool Portal. All rights reserved.</p>
       </footer>
     </div>
   );
