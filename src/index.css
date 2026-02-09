@@ -9,8 +9,8 @@ body {
   margin: 0;
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
   line-height: 1.5;
-  color: #333;
-  background-color: #f0f2f5; /* Light gray background */
+  color: #e0e0e0; /* 明るい文字色 */
+  background-color: #121212; /* 暗い背景色 */
 }
 
 /* App container */
@@ -24,9 +24,9 @@ body {
 /* PathReplacer specific styles */
 .container-wrapper {
   padding: 1rem;
-  background-color: #ffffff;
+  background-color: #1e1e1e; /* 暗い要素の背景色 */
   border-radius: 8px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3); /* 暗いシャドウ */
   margin-bottom: 1.5rem;
 }
 
@@ -34,13 +34,13 @@ body {
   font-size: 1.875rem; /* text-3xl */
   font-weight: bold;
   text-align: center;
-  color: #1a202c; /* gray-900 */
+  color: #f0f0f0; /* 明るいタイトル色 */
   margin-bottom: 0.5rem;
 }
 
 .description {
   text-align: center;
-  color: #4a5568; /* gray-600 */
+  color: #b0b0b0; /* 明るい説明文色 */
   margin-bottom: 1.5rem;
 }
 
@@ -60,7 +60,7 @@ body {
   display: block;
   font-size: 0.875rem; /* text-sm */
   font-weight: 500;
-  color: #4a5568; /* gray-700 */
+  color: #b0b0b0; /* 明るいラベル色 */
   margin-bottom: 0.5rem;
 }
 
@@ -69,21 +69,21 @@ body {
   width: 100%;
   height: 500px;
   padding: 1rem;
-  border: 1px solid #e2e8f0; /* gray-300 */
+  border: 1px solid #444; /* 暗いボーダー色 */
   border-radius: 0.5rem; /* rounded-lg */
-  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.06); /* shadow-inner */
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2); /* 暗いシャドウ */
   outline: none;
   font-size: 0.875rem; /* text-sm */
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace; /* font-mono */
-  background-color: #2d3748; /* gray-800 */
-  color: #f7fafc; /* gray-100 */
+  background-color: #2d3748; /* 既存のダークカラー維持 */
+  color: #f7fafc; /* 既存の明るい文字色維持 */
   overflow: auto;
   line-height: 1.625; /* leading-relaxed */
   white-space: pre-wrap; /* preserve whitespace */
 }
 
 .output-editor {
-  background-color: #1a202c; /* gray-900 */
+  background-color: #1a202c; /* 既存のダークカラー維持 */
 }
 
 .button-container {
@@ -97,7 +97,7 @@ body {
   align-items: center;
   padding: 0.75rem 1.5rem; /* px-6 py-3 */
   border: 1px solid transparent;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05); /* shadow-sm */
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1); /* shadow-sm */
   font-size: 1rem; /* text-base */
   font-weight: 500;
   border-radius: 0.375rem; /* rounded-md */
@@ -115,7 +115,7 @@ body {
 .replace-button:focus {
   outline: 2px solid transparent;
   outline-offset: 2px;
-  box-shadow: 0 0 0 2px #ffffff, 0 0 0 4px #6366f1; /* focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 */
+  box-shadow: 0 0 0 2px #121212, 0 0 0 4px #6366f1; /* focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 - 背景色に合わせて修正 */
 }
 
 .button-icon {
@@ -127,21 +127,21 @@ body {
 
 /* Highlighting styles */
 .highlight-yellow {
-  background-color: rgba(252, 211, 77, 0.7); /* bg-yellow-300 with some transparency */
+  background-color: rgba(252, 211, 77, 0.4); /* 暗い背景に合うように透明度調整 */
   color: #1a202c; /* Dark text on yellow */
   padding: 0 2px;
   border-radius: 2px;
 }
 
 .highlight-blue {
-  background-color: rgba(96, 165, 250, 0.7); /* bg-blue-400 */
+  background-color: rgba(96, 165, 250, 0.4); /* 暗い背景に合うように透明度調整 */
   color: #ffffff;
   padding: 0 2px;
   border-radius: 2px;
 }
 
 .highlight-green {
-  background-color: rgba(52, 211, 153, 0.7); /* bg-green-400 */
+  background-color: rgba(52, 211, 153, 0.4); /* 暗い背景に合うように透明度調整 */
   color: #1a202c;
   padding: 0 2px;
   border-radius: 2px;
@@ -153,21 +153,22 @@ body {
   display: inline-flex;
   align-items: center;
   padding: 0.375rem 0.75rem; /* text-xs, px-3 py-1.5 */
-  border: 1px solid rgba(0, 0, 0, 0.1);
+  border: 1px solid #444; /* 暗いボーダー色 */
   border-radius: 0.25rem; /* rounded-md */
-  background-color: #f7fafc; /* gray-100 */
-  color: #2d3748; /* gray-800 */
+  background-color: #2d2d2d; /* 暗い背景色 */
+  color: #e0e0e0; /* 明るい文字色 */
   font-size: 0.75rem; /* text-xs */
   font-weight: 500;
   cursor: pointer;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2); /* 暗いシャドウ */
   transition: background-color 0.15s ease-in-out;
   z-index: 10; /* Ensure it's above the textarea */
-  opacity: 0.5;
+  opacity: 0.7; /* 視認性向上のため */
 }
 
 .copy-button:hover {
-  background-color: #edf2f7; /* gray-200 */
+  background-color: #3a3a3a; /* ホバー時の色 */
+  opacity: 1;
 }
 
 .button-icon-small {
@@ -182,12 +183,12 @@ body {
   display: flex;
   justify-content: space-around;
   padding: 1rem;
-  background-color: #e0f2f7; /* Light blue background */
+  background-color: #2d2d2d; /* 暗い背景色 */
   border-radius: 8px;
   margin-bottom: 1.5rem;
   font-size: 0.9rem;
-  color: #007bff; /* Darker blue text */
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+  color: #88aaff; /* コントラストが効く青系の色 */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* 暗いシャドウ */
   flex-wrap: wrap; /* Allow wrapping on smaller screens */
 }
 
@@ -198,12 +199,12 @@ body {
 
 /* Warning/Info Box */
 .info-box {
-  background-color: #fff3cd; /* Light yellow background */
-  border: 1px solid #ffeeba; /* Yellow border */
+  background-color: #33301c; /* 暗い黄色の背景 */
+  border: 1px solid #5a552e; /* 暗い黄色のボーダー */
   border-radius: 0.5rem;
   padding: 1rem;
   margin-bottom: 1.5rem;
-  color: #856404; /* Dark yellow text */
+  color: #e0e0a0; /* 明るい黄色の文字 */
   font-size: 0.875rem;
 }
 
@@ -217,7 +218,7 @@ body {
 
 .info-label {
   font-weight: bold;
-  color: #664d03;
+  color: #e0e0a0; /* 明るい黄色の文字 */
   margin-right: 0.5rem;
 }
 
@@ -225,7 +226,7 @@ body {
   display: flex; /* Use flexbox for icon and text alignment */
   align-items: flex-start; /* Align items to the start of the cross axis */
   font-weight: 500;
-  color: #856404; /* Dark yellow text */
+  color: #e0e0a0; /* 明るい黄色の文字 */
 }
 
 .warning-icon {
@@ -233,13 +234,13 @@ body {
   width: 1.25rem; /* w-5, Adjust size as needed */
   margin-right: 0.5rem; /* Space between icon and text */
   flex-shrink: 0; /* Prevent icon from shrinking */
-  color: #856404; /* Match icon color to text */
+  color: #e0e0a0; /* Match icon color to text */
 }
 
 /* Subfolder Options */
 .options-container {
-  background-color: #f8f9fa;
-  border: 1px solid #e9ecef;
+  background-color: #2d2d2d; /* 暗い背景色 */
+  border: 1px solid #444; /* 暗いボーダー色 */
   border-radius: 8px;
   padding: 1rem;
   margin-bottom: 1.5rem;
@@ -255,7 +256,7 @@ body {
 }
 
 .option-item label {
-  color: #495057;
+  color: #e0e0e0; /* 明るい文字色 */
   font-weight: 500;
   user-select: none;
 }
@@ -263,21 +264,23 @@ body {
 .option-item input[type="checkbox"] {
   width: 1rem;
   height: 1rem;
+  /* チェックボックスの色調整（必要であれば） */
+  accent-color: #4f46e5; /* 例：テーマカラー */
 }
 
 .subfolder-input {
   width: 100%;
   padding: 0.5rem 0.75rem;
-  border: 1px solid #ced4da;
+  border: 1px solid #444; /* 暗いボーダー色 */
   border-radius: 4px;
   font-size: 0.9rem;
-  color: #212529;
-  background-color: #fff;
+  color: #e0e0e0; /* 明るい文字色 */
+  background-color: #1e1e1e; /* 暗い背景色 */
   transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
 
 .subfolder-input:focus {
-  border-color: #80bdff;
+  border-color: #6366f1; /* フォーカス時の色をテーマカラーに合わせる */
   outline: 0;
-  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+  box-shadow: 0 0 0 0.2rem rgba(79, 70, 229, 0.25); /* フォーカス時のシャドウをテーマカラーに合わせる */
 }

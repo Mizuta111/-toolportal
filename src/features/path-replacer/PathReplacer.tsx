@@ -33,11 +33,14 @@ const PathReplacer: React.FC = () => {
 
   // Regex for HTML attributes (src, srcset, data-*, background, href)
   // Captures: 1: quote, 2: path before extension
-  const htmlImagePathRegex = /(?:src|srcset|data-[a-z-]+|background|href)\s*=\s*(['"]?)([^'")\s>]+\.(?:png|jpg|jpeg|gif|svg|webp|bmp|ico))\1/gi;
+  const htmlImagePathRegex = /(?:src|srcset|data-[a-z-]+|background|href)\s*=\s*(['"]?)([^'")>]+?\.(?:png|jpg|jpeg|gif|svg|webp|bmp|ico))\1/giu;
 
   // Regex for CSS url() function
   // Captures: 1: path before extension
-  const cssImagePathRegex = /url\(['"]?([^'")\s>]+\.(?:png|jpg|jpeg|gif|svg|webp|bmp|ico))['"]?\)/gi;
+  const cssImagePathRegex = /url\(['"]?([^'")>]+?\.(?:png|jpg|jpeg|gif|svg|webp|bmp|ico))['"]?\)/giu;
+
+  // Regex for CSS variables containing image paths
+  const cssVariableImagePathRegex = /--[a-zA-Z0-9-]+:\s*url\(['"]?([^'")>]+?\.(?:png|jpg|jpeg|gif|svg|webp|bmp|ico))['"]?\)/giu;
 
   // Regex for highlighting replaced paths in the output (now uses the same pattern as target replacement)
 
@@ -102,6 +105,17 @@ const PathReplacer: React.FC = () => {
         }
     }
 
+    cssVariableImagePathRegex.lastIndex = 0; // Reset regex
+    while ((match = cssVariableImagePathRegex.exec(inputCode)) !== null) {
+        const fullMatch = match[0];
+        const pathPart = match[2]; // キャプチャグループ2が画像パス本体
+        tempCssFound++; // CSS変数はCSSとしてカウント
+        newlyFoundRanges.push({ start: match.index, end: match.index + fullMatch.length });
+        if (pathPart && !pathPart.includes('{+image_url+}')) {
+            allMatches.push({ index: match.index, original: fullMatch, type: 'css', pathPart });
+        }
+    }
+
     // Sort matches by index to process them in order
     allMatches.sort((a, b) => a.index - b.index);
 
@@ -132,7 +146,7 @@ const PathReplacer: React.FC = () => {
                 replacedPart = matchedItem.original.replace(matchedItem.pathPart, newPath);
             } else if (matchedItem.type === 'css') {
                 cssReplacedCount++;
-                replacedPart = `url(${newPath})`;
+                replacedPart = matchedItem.original.replace(matchedItem.pathPart, newPath);
             }
 
             const newPathIndex = replacedPart.indexOf(newPath);
@@ -155,11 +169,14 @@ const PathReplacer: React.FC = () => {
     setOutputCode(output);
     setHighlightRanges(newlyReplacedRanges);
 
+    const finalHtmlFound = allMatches.filter(item => item.type === 'html').length;
+    const finalCssFound = allMatches.filter(item => item.type === 'css').length;
+
     setReplacementSummary({
-      html: { found: tempHtmlFound, replaced: htmlReplacedCount },
-      css: { found: tempCssFound, replaced: cssReplacedCount },
+      html: { found: finalHtmlFound, replaced: htmlReplacedCount },
+      css: { found: finalCssFound, replaced: cssReplacedCount },
       // js: { found: tempJsFound, replaced: 0 }, // JS is counting only
-      total: { found: tempHtmlFound + tempCssFound /* + tempJsFound */, replaced: htmlReplacedCount + cssReplacedCount },
+      total: { found: finalHtmlFound + finalCssFound, replaced: htmlReplacedCount + cssReplacedCount },
     });
   };
 
