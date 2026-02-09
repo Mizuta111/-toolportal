@@ -124,7 +124,8 @@ const PathReplacer: React.FC = () => {
     let cssReplacedCount = 0;
 
     // --- 2. Build the output string and calculate highlight ranges ---
-    const subfolderPath = useSubfolder && subfolderName.trim() !== '' ? `${subfolderName.trim()}/` : '';
+    const subfolderNameTrimmed = subfolderName.trim();
+    const subfolderPath = useSubfolder && subfolderNameTrimmed !== '' ? `${encodeURIComponent(subfolderNameTrimmed)}/` : '';
     const basePath = `{+image_url+}imgs/${subfolderPath}`;
 
     for (const matchedItem of allMatches) {
