@@ -29,18 +29,15 @@ const PathReplacer: React.FC = () => {
   const [highlightRanges, setHighlightRanges] = useState<{start: number, end: number}[]>([]);
 
   // Define supported image extensions from regex
-  const supportedImageExtensions = ['png', 'jpg', 'jpeg', 'gif', 'svg', 'webp', 'bmp', 'ico'];
+  const supportedImageExtensions = ['png', 'jpg', 'jpeg', 'gif', 'svg', 'webp', 'bmp', 'ico', 'mp4'];
 
   // Regex for HTML attributes (src, srcset, data-*, background, href)
   // Captures: 1: quote, 2: path before extension
-  const htmlImagePathRegex = /(?:src|srcset|data-[a-z-]+|background|href)\s*=\s*(['"]?)([^'")>]+?\.(?:png|jpg|jpeg|gif|svg|webp|bmp|ico))\1/giu;
+  const htmlImagePathRegex = /(?:src|srcset|data-[a-z-]+|background|href)\s*=\s*(['"]?)([^'")>]+?\.(?:png|jpg|jpeg|gif|svg|webp|bmp|ico|mp4))\1/giu;
 
-  // Regex for CSS url() function
+  // Regex for CSS url() function (also handles url() inside CSS variables)
   // Captures: 1: path before extension
-  const cssImagePathRegex = /url\(['"]?([^'")>]+?\.(?:png|jpg|jpeg|gif|svg|webp|bmp|ico))['"]?\)/giu;
-
-  // Regex for CSS variables containing image paths
-  const cssVariableImagePathRegex = /--[a-zA-Z0-9-]+:\s*url\(['"]?([^'")>]+?\.(?:png|jpg|jpeg|gif|svg|webp|bmp|ico))['"]?\)/giu;
+  const cssImagePathRegex = /url\(['"]?([^'")>]+?\.(?:png|jpg|jpeg|gif|svg|webp|bmp|ico|mp4))['"]?\)/giu;
 
   // Regex for highlighting replaced paths in the output (now uses the same pattern as target replacement)
 
@@ -101,17 +98,6 @@ const PathReplacer: React.FC = () => {
         tempCssFound++;
         newlyFoundRanges.push({ start: match.index, end: match.index + fullMatch.length });
         if (pathPart && !pathPart.includes('{+image_url+}')) { // Only process if not already replaced
-            allMatches.push({ index: match.index, original: fullMatch, type: 'css', pathPart });
-        }
-    }
-
-    cssVariableImagePathRegex.lastIndex = 0; // Reset regex
-    while ((match = cssVariableImagePathRegex.exec(inputCode)) !== null) {
-        const fullMatch = match[0];
-        const pathPart = match[2]; // キャプチャグループ2が画像パス本体
-        tempCssFound++; // CSS変数はCSSとしてカウント
-        newlyFoundRanges.push({ start: match.index, end: match.index + fullMatch.length });
-        if (pathPart && !pathPart.includes('{+image_url+}')) {
             allMatches.push({ index: match.index, original: fullMatch, type: 'css', pathPart });
         }
     }
